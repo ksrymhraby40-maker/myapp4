@@ -29,6 +29,11 @@ jobs:
         pip3 install --user --upgrade buildozer
         pip3 install --user --upgrade cython==0.29.36
 
+    - name: Accept Android Licenses
+      run: |
+        export PATH=$PATH:$HOME/.local/bin
+        yes | buildozer -v android debug 2>&1 | head -n 50 || true
+
     - name: Build with Buildozer
       run: |
         export PATH=$PATH:$HOME/.local/bin
