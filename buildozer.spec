@@ -3,12 +3,12 @@ title = Kasmy app
 package.name = myapp4
 package.domain = org.example
 source.dir = .
-source.include_exts = py,png,jpg
+source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 requirements = python3,kivy
-icon.filename = icon.png
 orientation = portrait
-android.archs = arm64-v8a
+android.accept_sdk_license = True
 
 [buildozer]
 log_level = 2
+warn_on_root = 1
