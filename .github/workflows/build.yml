@@ -29,12 +29,18 @@ jobs:
         pip3 install --user --upgrade buildozer
         pip3 install --user --upgrade cython==0.29.36
 
+    - name: Download and Install Android Command Line Tools
+      run: |
+        mkdir -p ~/.buildozer/android/platform/android-sdk/cmdline-tools
+        cd ~/.buildozer/android/platform/android-sdk/cmdline-tools
+        wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+        unzip commandlinetools-linux-11076708_latest.zip
+        mv cmdline-tools latest
+        rm commandlinetools-linux-11076708_latest.zip
+
     - name: Accept Android SDK Licenses
       run: |
-        export PATH=$PATH:$HOME/.local/bin
-        mkdir -p ~/.buildozer/android/platform/android-sdk/licenses
-        echo -e "\n8933bad161af4b6a5b573652ffc7aaf3aee85a47" > ~/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
-        echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > ~/.buildozer/android/platform/android-sdk/licenses/android-sdk-preview-license
+        export PATH=$PATH:$HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin
         yes | sdkmanager --licenses || true
 
     - name: Build with Buildozer
